@@ -1,2 +1,6 @@
 data/
+<<<<<<< HEAD
+=======
+__pycache__/
+>>>>>>> 56130a5 (Final: Code and Interpretability results (data excluded))
 *.tar.gz

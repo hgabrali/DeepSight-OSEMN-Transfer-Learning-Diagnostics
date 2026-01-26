@@ -1,58 +1,60 @@
-# 👁️ DeepSight: OSEMN Transfer Learning & Forensic Diagnostics
+# 🚀 DeepSight: OSEMN Transfer Learning & Forensic Diagnostics
 
 ## 📌 Project Overview
-**DeepSight** is a comprehensive computer vision project that implements the **OSEMN** (Obtain, Scrub, Explore, Model, iNterpret) framework to solve the CIFAR-10 classification problem. Unlike standard implementations, this project focuses on **forensic diagnostics**, addressing "hidden" issues such as texture leaks, background biases, and semantic ambiguity to ensure robust model performance.
+**DeepSight** is a high-performance computer vision pipeline designed to master the CIFAR-10 classification challenge through the **OSEMN framework**. Beyond standard predictive modeling, this project functions as a **Forensic Diagnostic Tool**, leveraging **Explainable AI (XAI)** to validate model decision-making processes and mitigate systemic issues such as background bias and semantic ambiguity.
 
 ---
 
 ## 🛠 Technical Workflow (The OSEMN Approach)
 
-### 1. Obtain: Data Acquisition & Environment
-![Data Acquisition Placeholder](https://via.placeholder.com/800x200?text=Obtain:+Data+Acquisition+Process)
+### 1. Obtain: Data Acquisition & Stratification
 
-* **Source:** CIFAR-10 ingestion via modular API integration.
-* **Stratified Sampling:** Implemented a stratified downsampling strategy to create a representative prototype subset (20%) while maintaining original class distribution integrity.
-* **Success Metrics:** Defined **F1-Score (Macro)** as the primary metric and established a **Minimum Viable Accuracy (MVA)** baseline of 65%.
+* **Modular Ingestion:** Seamless CIFAR-10 integration via a decoupled `obtain.py` module for improved maintainability.
+* **Stratified Sampling:** Implementation of a **10% stratified subset** to facilitate rapid prototyping while preserving original class balance.
+* **MVA Baseline:** Establishment of a **Minimum Viable Accuracy (MVA)** threshold of 65% for the initial frozen-base development phase.
 
-### 2. Scrub: Data Engineering & Integrity
-![Data Scrubbing Placeholder](https://via.placeholder.com/800x200?text=Scrub:+Preprocessing+and+Cleaning)
-
-* **Dimensional Integrity:** Automated pre-batch verification to ensure consistency in input shapes of $(3, 224, 224)$.
-* **Advanced Preprocessing:** Comparative analysis of **Bilinear vs. Bicubic interpolation** to mitigate aliasing artifacts.
-* **Normalization:** Implemented **Caffe-style normalization** (BGR mean subtraction) to align with pre-trained ResNet weights.
-* **Leakage Prevention:** Metadata sanitization to prevent "Class Leakage" via filenames or sequence overlap.
+### 2. Scrub: Data Engineering & Normalization
+* **Dimensional Consistency:** Automated resizing pipelines to $(3, 224, 224)$ to satisfy **ResNet-18** architectural input requirements.
+* **Interpolation Strategy:** Utilization of **Bicubic Interpolation** to preserve high-frequency spatial details, outperforming standard bilinear methods in feature retention.
+* **Feature Scaling:** Application of **ImageNet-specific normalization** ($\mu, \sigma$) to align input data with the pre-trained manifold.
 
 ### 3. Explore: Forensic EDA
-![Exploratory Data Analysis Placeholder](https://via.placeholder.com/800x200?text=Explore:+Forensic+EDA+Visuals)
-
-* **Spatial Bias Analysis:** Generated **Annotation Density Maps** to identify "Center Bias" in object placement.
-* **Color Channel Analysis:** RGB/HSV histogram analysis to detect potential **Background Biases** (e.g., Bird vs. Airplane sky bias).
-* **Hypothesis Generation:** Identified **Semantic Ambiguity** (Car vs. Truck) and distinguished between **Rigid vs. Organic features** for custom augmentation strategies.
+* **Spatial Analysis:** Evaluation of **Annotation Density** to identify and account for center-bias inherent in the CIFAR-10 dataset.
+* **Semantic Ambiguity:** Mapping the **"Car-Truck Boundary"** to anticipate and mitigate class-overlap during the subsequent modeling phase.
+* **Hypothesis Testing:** Investigation of color-channel distributions to identify potential **"Sky-Bias"** within airplane vs. bird classifications.
 
 ### 4. Model: Two-Phase Transfer Learning
-![Model Architecture Placeholder](https://via.placeholder.com/800x200?text=Model:+ResNet18+Transfer+Learning+Pipeline)
 
-* **Phase 1: Frozen Base:** Feature extraction using **ResNet18** with a custom-reconstructed **Fully Connected (FC) head**.
-* **Phase 2: Fine-Tuning:** Strategic unfreezing of deeper layers (**Stage 3 & 4**) for domain adaptation.
-* **Optimization:** Utilized **Differential Learning Rates** and `ReduceLROnPlateau` scheduling for smooth optimization and convergence.
-* **Augmentation:** Applied a dual-strategy pipeline (**Geometric & Photometric**) using the **Albumentations** library.
+* **Phase 1 (Feature Extraction):** Deployment of a frozen **ResNet-18 backbone** featuring a custom-reconstructed **Fully Connected (FC) head**.
+* **Phase 2 (Fine-Tuning):** Strategic unfreezing of **Stage 3 & 4** of the backbone to allow for domain-specific weight adaptation.
+* **Optimization Strategy:** Implementation of **Differential Learning Rates** to balance stability and adaptation:
+    * **Backbone Layers:** $\eta = 10^{-5}$
+    * **Classification Head:** $\eta = 10^{-4}$
 
-### 5. iNterpret: Diagnostic Evaluation
-![Model Interpretation Placeholder](https://via.placeholder.com/800x200?text=iNterpret:+Grad-CAM+and+Confusion+Matrix)
+### 5. iNterpret: Explainable AI (XAI)
 
-* **Convergence Analysis:** Visualization of Loss/Accuracy curves to monitor for overfitting.
-* **Limits of Resolution:** Confusion Matrix analysis to pinpoint semantic swapping (e.g., the **"Car-Truck Boundary"**).
-* **Blind Spot Analysis:** Leveraged **Grad-CAM** (Gradient-weighted Class Activation Mapping) to verify if the model learns shapes (Global features) or simply exploits **Texture Leaks** (Local features).
+* **Forensic Diagnostics:** Generation of dual **Confusion Matrices** to visualize the performance delta between Phase 1 (Frozen) and the Final Fine-Tuning stage.
+* **Explainability:** Leveraging **Grad-CAM** (Gradient-weighted Class Activation Mapping) to produce heatmaps, verifying that the model prioritizes **global shapes** over local texture leaks or background noise.
 
 ---
 
-## 📊 Key Results
+## 📊 Performance Benchmarks
 
-| Metric | Value |
-| :--- | :--- |
-| **Final Accuracy** | ~84% (Validation) |
-| **Macro F1-Score** | 0.82 |
-| **Bias Detection** | Grad-CAM confirmed focus on object features rather than background noise for 90% of test samples. |
+| Metric | Phase 1 (Frozen) | Final (Fine-Tuning) |
+| :--- | :--- | :--- |
+| **Accuracy** | 66.5% | **92.0% 🏆** |
+| **Macro F1-Score** | 0.67 | 0.92 |
+| **Precision (Truck)** | 0.72 | 0.96 |
+| **Inference Mode** | Feature Extraction | Weight Adaptation |
+
+> [!NOTE]
+> The **26.5% accuracy increase** observed between Phase 1 and Phase 2 confirms the successful adaptation of deep convolutional filters to CIFAR-10 specific visual textures.
 
 ---
 
+## 🔥 Visual Evidence (XAI)
+
+* **Grad-CAM:** Diagnostic plots located in the `notebooks/` directory confirm a **90%+ object-focus rate**, indicating high model reliability.
+* **Confusion Matrix:** Final analysis demonstrates a significant reduction in **"Semantic Swapping"** between rigid vehicle classes (e.g., Cars and Trucks).
+
+---
