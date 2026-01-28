@@ -8,6 +8,7 @@ Transitioning from the grayscale simplicity of datasets like Fashion MNIST, this
 
 The primary objective is to implement a **Transfer Learning** approach using the **ResNet50** architecture, demonstrating the efficiency of using pre-trained weights (ImageNet) to solve complex image classification tasks even with relatively low-resolution inputs. Unlike standard implementations, this project enforces a **Minimum Viable Accuracy (MVA)** of 65% and employs a rigorous **"Forensic Error Analysis"** pipeline to detect semantic ambiguity and contextual bias.
 
+* I feel like 'DeepSight' is such a spot-on metaphor. It’s basically where Computer Vision and Deep Learning meet. Using OSEMN as my roadmap, I decided to go with Transfer Learning—which meant taking models like ResNet or VGG that were already trained on massive datasets and just fine-tuning them for my needs.*  
 ---
 
 ## 📊 Dataset Insights & Problem Framing
