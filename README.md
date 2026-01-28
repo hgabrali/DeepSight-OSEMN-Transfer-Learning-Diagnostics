@@ -25,6 +25,9 @@ CIFAR-10 presents a unique challenge due to the low signal-to-noise ratio inhere
 ## 🛠 Methodology: The OSEMN Framework
 This project follows the **OSEMN** (Obtain, Scrub, Explore, Model, iNterpret) pipeline to ensure reproducibility and engineering rigor.
 
+<img width="1238" height="678" alt="image" src="https://github.com/user-attachments/assets/5e0225dc-dc0b-41b6-a97c-12c5ef5bac61" />
+
+
 ### 1. Phase 1: Data Acquisition (Obtain)
 * **Ingestion:** Data is loaded via `tensorflow.keras.datasets` to ensure source integrity.
 * **Orchestration:** The pipeline is orchestrated using **PyTorch** for Deep Learning and **Albumentations** for robust data augmentation.
