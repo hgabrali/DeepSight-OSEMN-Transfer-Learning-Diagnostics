@@ -1,12 +1,12 @@
 #  DeepSight: OSEMN Transfer Learning & Forensic Diagnostics
 
-<img width="1122" height="633" alt="image" src="https://github.com/user-attachments/assets/e7e9f570-aff0-401b-9741-6673219094f6" />
+
 
 
 ## 📌 Project Overview
 Transitioning from the grayscale simplicity of datasets like Fashion MNIST, this project tackles the **CIFAR-10** dataset—a benchmark in computer vision consisting of 60,000 $32 \times 32$ color images across 10 mutually exclusive classes.
 
-The primary objective is to implement a **Transfer Learning** approach using the **ResNet50** architecture, demonstrating the efficiency of using pre-trained weights (ImageNet) to solve complex image classification tasks even with relatively low-resolution inputs. Unlike standard implementations, this project enforces a **Minimum Viable Accuracy (MVA)** of 65% and employs a rigorous **"Forensic Error Analysis"** pipeline to detect semantic ambiguity and contextual bias.
+The primary objective is to implement a **Transfer Learning** approach using the **ResNet18** architecture, demonstrating the efficiency of using pre-trained weights (ImageNet) to solve complex image classification tasks even with relatively low-resolution inputs. Unlike standard implementations, this project enforces a **Minimum Viable Accuracy (MVA)** of 65% and employs a rigorous **"Forensic Error Analysis"** pipeline to detect semantic ambiguity and contextual bias.
 
 * I feel like 'DeepSight' is such a spot-on metaphor. It’s basically where Computer Vision and Deep Learning meet. Using OSEMN as my roadmap, I decided to go with Transfer Learning—which meant taking models like ResNet or VGG that were already trained on massive datasets and just fine-tuning them for my needs.*  
 ---
@@ -47,7 +47,7 @@ This project follows the **OSEMN** (Obtain, Scrub, Explore, Model, iNterpret) pi
 
 ### 4. Phase 4: Model Architecture (Model)
 
-* **Backbone:** **ResNet50** (Pre-trained on ImageNet) is utilized to leverage robust hierarchical feature extractors (edges, textures).
+* **Backbone:** **ResNet18** (Pre-trained on ImageNet) is utilized to leverage robust hierarchical feature extractors (edges, textures).
 * **Head Reconstruction:** The final Fully Connected (FC) layer is replaced to project the 1,000 ImageNet classes down to the 10 CIFAR classes.
 * **Training Dynamics:**
     * **Frozen Phase:** The backbone is frozen to prevent **"Catastrophic Forgetting"** of pre-trained weights during the initial epochs.
