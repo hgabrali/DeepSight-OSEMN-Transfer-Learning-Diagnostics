@@ -1,5 +1,6 @@
 #  DeepSight: OSEMN Transfer Learning & Forensic Diagnostics
 
+<img width="1188" height="622" alt="image" src="https://github.com/user-attachments/assets/79ec62b0-e06d-41a2-90ea-a992f4dedfc4" />
 
 
 
