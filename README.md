@@ -3,7 +3,7 @@
 
 
 
-## 📌 Project Overview
+## 📌 Project Overview 
 Transitioning from the grayscale simplicity of datasets like Fashion MNIST, this project tackles the **CIFAR-10** dataset—a benchmark in computer vision consisting of 60,000 $32 \times 32$ color images across 10 mutually exclusive classes.
 
 The primary objective is to implement a **Transfer Learning** approach using the **ResNet18** architecture, demonstrating the efficiency of using pre-trained weights (ImageNet) to solve complex image classification tasks even with relatively low-resolution inputs. Unlike standard implementations, this project enforces a **Minimum Viable Accuracy (MVA)** of 65% and employs a rigorous **"Forensic Error Analysis"** pipeline to detect semantic ambiguity and contextual bias.
